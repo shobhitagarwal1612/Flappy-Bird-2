@@ -25,6 +25,7 @@ class ResultLayer(cocos.layer.Layer):
             font_size=32
         )
         self._scoreLabel.position = 120, 22
+        self.add(self._scoreLabel, z=2)
 
         self._highScoreLabel = cocos.text.Label(
             '0',
@@ -32,5 +33,18 @@ class ResultLayer(cocos.layer.Layer):
             font_size=32
         )
         self._highScoreLabel.position = 120, -45
+        self.add(self._highScoreLabel, z=2)
 
         self.add(self._result_board, 0)
+
+    def set_score(self, score, highscore):
+        self._medal_silver.visible = False
+        self._medal_gold.visible = False
+
+        if score >= 50:
+            self._medal_gold.visible = True
+        elif score >= 20:
+            self._medal_silver.visible = True
+
+        self._scoreLabel.string = score
+        self._highScoreLabel.string = highscore
