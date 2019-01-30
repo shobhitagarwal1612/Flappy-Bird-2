@@ -1,5 +1,7 @@
 import cocos
 
+from layers.floor import FloorLayer
+
 
 class MainLayer(cocos.layer.ColorLayer):
 
@@ -17,3 +19,6 @@ class MainLayer(cocos.layer.ColorLayer):
         play_button_sprite = cocos.sprite.Sprite('res/play_button.png')
         play_button_sprite.position = self.width / 2, self.height / 2 - 150
         self.add(play_button_sprite, z=15)
+
+        floor_layer = FloorLayer()
+        self.add(floor_layer, z=10)
