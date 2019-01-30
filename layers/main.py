@@ -20,5 +20,5 @@ class MainLayer(cocos.layer.ColorLayer):
         play_button_sprite.position = self.width / 2, self.height / 2 - 150
         self.add(play_button_sprite, z=15)
 
-        floor_layer = FloorLayer()
+        floor_layer = FloorLayer(self.width)
         self.add(floor_layer, z=10)
