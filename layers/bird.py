@@ -12,9 +12,22 @@ class BirdLayer(cocos.layer.Layer):
 
         self.screen_width = screen_width
 
-        self.bird_sprite = cocos.sprite.Sprite('res/bird1.png')
+        self.start_flapping()
 
-        self.add(self.bird_sprite)
+    def start_flapping(self):
+        anim_frames = []
+
+        self.sprite_sheet = cocos.sprite.BatchableNode()
+        self.add(self.sprite_sheet)
+
+        # self.sprite1 = cocos.sprite.Sprite("res/bird1.png")
+        # self.sprite_sheet.add(self.sprite1)
+        #
+        # self.sprite2 = cocos.sprite.Sprite("res/bird2.png")
+        # self.sprite_sheet.add(self.sprite2)
+        #
+        # self.sprite3 = cocos.sprite.Sprite("res/bird3.png")
+        # self.sprite_sheet.add(self.sprite3)
 
     def reset(self):
         self.state = self.bird_state_stopped
