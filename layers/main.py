@@ -1,5 +1,4 @@
 import cocos
-from cocos.director import director
 
 
 class MainLayer(cocos.layer.ColorLayer):
@@ -18,8 +17,3 @@ class MainLayer(cocos.layer.ColorLayer):
         play_button_sprite = cocos.sprite.Sprite('res/play_button.png')
         play_button_sprite.position = self.width / 2, self.height / 2 - 150
         self.add(play_button_sprite, z=15)
-
-
-director.init(resizable=True)
-
-director.run(cocos.scene.Scene(MainLayer()))
