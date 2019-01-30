@@ -18,9 +18,6 @@ class FloorLayer(cocos.layer.Layer):
         self.add(self.road_sprite1)
         self.add(self.road_sprite2)
 
-        # TODO: fix crash
-        # self.schedule_interval(self.keep_moving(), 3)
-
     def reset_position(self):
         self.road_sprite1.stop()
         self.road_sprite2.stop()
@@ -30,6 +27,10 @@ class FloorLayer(cocos.layer.Layer):
 
         self.road_sprite2.position = self.road_sprite1.width, 0
         self.road_sprite2.anchor = 0, 0
+
+    def start_animation(self):
+        # self.schedule_interval(self.keep_moving(), self.get_time() * 3)
+        pass
 
     def keep_moving(self):
         self.reset_position()

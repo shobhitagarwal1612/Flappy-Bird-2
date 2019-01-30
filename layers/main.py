@@ -17,8 +17,13 @@ class MainLayer(cocos.layer.ColorLayer):
         self.add(name_sprite, z=20)
 
         play_button_sprite = cocos.sprite.Sprite('res/play_button.png')
-        play_button_sprite.position = self.width / 2, self.height / 2 - 150
+        play_button_sprite.position = self.width / 2, self.height / 4
         self.add(play_button_sprite, z=15)
 
-        floor_layer = FloorLayer(self.width)
-        self.add(floor_layer, z=10)
+        self.floor_layer = FloorLayer(self.width)
+        self.add(self.floor_layer, z=10)
+
+    def on_enter(self):
+        super(MainLayer, self).on_enter()
+
+        self.floor_layer.start_animation()
