@@ -23,8 +23,8 @@ class BirdLayer(cocos.layer.Layer):
         # self.sprite1 = cocos.sprite.Sprite("res/bird1.png")
         # self.sprite_sheet.add(self.sprite1)
         #
-        # self.sprite2 = cocos.sprite.Sprite("res/bird2.png")
-        # self.sprite_sheet.add(self.sprite2)
+        self.sprite2 = cocos.sprite.Sprite("res/bird2.png")
+        self.sprite_sheet.add(self.sprite2)
         #
         # self.sprite3 = cocos.sprite.Sprite("res/bird3.png")
         # self.sprite_sheet.add(self.sprite3)
