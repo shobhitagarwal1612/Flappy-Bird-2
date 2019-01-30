@@ -1,4 +1,5 @@
 import cocos
+import pyglet
 from cocos.sprite import Sprite
 
 from layers.bird import BirdLayer
@@ -7,6 +8,7 @@ from layers.result_board import ResultLayer
 
 
 class MainLayer(cocos.layer.ColorLayer):
+    is_event_handler = True
 
     def __init__(self):
         super(MainLayer, self).__init__(0, 0, 0, 255)
@@ -92,6 +94,12 @@ class MainLayer(cocos.layer.ColorLayer):
         self.add(self.bird_layer, z=self.z_index_bird)
 
         self.set_score_labels()
+
+    def on_key_press(self, key, modifiers):
+        print('key pressed : %s' % pyglet.window.key.symbol_string(key))
+
+    def on_mouse_press(self, x, y, buttons, modifiers):
+        print('mouse click event : %d' % buttons)
 
     def on_enter(self):
         super(MainLayer, self).on_enter()
