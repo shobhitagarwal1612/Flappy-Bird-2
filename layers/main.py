@@ -91,7 +91,14 @@ class MainLayer(cocos.layer.ColorLayer):
         self.bird_layer.reset()
         self.add(self.bird_layer, z=self.z_index_bird)
 
+        self.set_score_labels()
+
     def on_enter(self):
         super(MainLayer, self).on_enter()
 
         self.floor_layer.start_animation()
+
+    def set_score_labels(self):
+        print('setScoreLabels():: Score:', self._score, ', Highscore:', self._highScore)
+
+        self._scoreLabel.string = str(self._score)
