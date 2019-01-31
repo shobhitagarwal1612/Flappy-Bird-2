@@ -56,7 +56,7 @@ class GameCtrl(Layer):
         self.elapsed += dt
         if self.elapsed > status.level.speed:
             self.elapsed = 0
-            self.model.block_down(sound=False)
+            self.model.move_pipes()
 
     def draw(self):
         """draw the map and the block"""

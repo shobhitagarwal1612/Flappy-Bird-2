@@ -83,12 +83,7 @@ if __name__ == "__main__":
     director.init(resizable=True, width=500, height=800)
 
     scene = Scene()
-    scene.add(
-        MultiplexLayer(
-            MainMenu(),
-            OptionsMenu(),
-            ScoresLayer(),
-        ), z=1)
+    scene.add(MultiplexLayer(MainMenu(), OptionsMenu(), ScoresLayer()), z=1)
 
     scene.add(BackgroundLayer(), z=0)
     director.run(scene)
