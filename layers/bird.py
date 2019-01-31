@@ -35,3 +35,6 @@ class BirdLayer(cocos.layer.Layer):
 
     def set_start_speed(self):
         self.speedY = self.bird_start_speedY
+
+    def start_vertical_movement(self):
+        print('bird vertical movement start')

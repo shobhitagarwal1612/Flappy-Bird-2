@@ -102,11 +102,21 @@ class MainLayer(cocos.layer.ColorLayer):
         print('mouse click event : %d' % buttons)
 
     def on_enter(self):
+        print('on enter')
         super(MainLayer, self).on_enter()
 
         self.floor_layer.start_animation()
+        # self.schedule(self.on_tick())
+        self.stop_game()
+        self.bird_layer.start_vertical_movement()
 
     def set_score_labels(self):
         print('setScoreLabels():: Score:', self._score, ', Highscore:', self._highScore)
 
         self._scoreLabel.string = str(self._score)
+
+    def on_tick(self):
+        print('on tick')
+
+    def stop_game(self):
+        print('stop game')
