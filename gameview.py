@@ -1,5 +1,7 @@
+import cocos
+import pyglet
 from cocos.director import director
-from cocos.layer import Layer
+from cocos.layer import Layer, ColorLayer
 from cocos.scene import Scene
 from pyglet.gl import glPushMatrix, glPopMatrix
 
@@ -8,6 +10,7 @@ from HUD import HUD
 from flappy_bird import BackgroundLayer
 from gamectrl import GameCtrl
 from gamemodel import GameModel
+from layers.floor import FloorLayer
 
 __all__ = ['get_newgame']
 
@@ -54,6 +57,19 @@ class GameView(Layer):
         self.transform()
 
         glPopMatrix()
+
+
+class BackgroundLayer(ColorLayer):
+    def __init__(self):
+        super(BackgroundLayer, self).__init__(0, 0, 0, 255)
+
+        self.background_sprite = cocos.sprite.Sprite(pyglet.resource.image('main_background.png'))
+        self.background_sprite.position = self.width / 2, self.height / 2
+        self.add(self.background_sprite, z=0)
+
+        self.floor_layer = FloorLayer(self.width)
+        self.floor_layer.position = 0, 50
+        self.add(self.floor_layer, z=10)
 
 
 def get_newgame():

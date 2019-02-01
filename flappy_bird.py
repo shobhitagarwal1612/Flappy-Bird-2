@@ -1,18 +1,19 @@
+import cocos
 import pyglet
 from cocos.director import director
-from cocos.layer import MultiplexLayer, Layer
+from cocos.layer import MultiplexLayer, ColorLayer
 from cocos.menu import Menu, CENTER, MenuItem, shake, shake_back
 from cocos.scene import Scene
 from pyglet import font
-from pyglet.gl.gl import glPushMatrix, glPopMatrix
 
 import gameview
+from layers.floor import FloorLayer
 
 
 class MainMenu(Menu):
 
     def __init__(self):
-        super(MainMenu, self).__init__('Flappy Bird 2')
+        super(MainMenu, self).__init__()
 
         self.font_title['font_name'] = 'Arial'
         self.font_title['font_size'] = 50
@@ -63,16 +64,21 @@ class ScoresLayer(Menu):
         super(ScoresLayer, self).__init__()
 
 
-class BackgroundLayer(Layer):
+class BackgroundLayer(ColorLayer):
     def __init__(self):
-        super(BackgroundLayer, self).__init__()
-        self.img = pyglet.resource.image('main_background.png')
+        super(BackgroundLayer, self).__init__(0, 0, 0, 255)
 
-    def draw(self):
-        glPushMatrix()
-        self.transform()
-        self.img.blit(0, 0)
-        glPopMatrix()
+        self.background_sprite = cocos.sprite.Sprite(pyglet.resource.image('main_background.png'))
+        self.background_sprite.position = self.width / 2, self.height / 2
+        self.add(self.background_sprite, z=0)
+
+        self.name_sprite = cocos.sprite.Sprite(pyglet.resource.image('game_name.png'))
+        self.name_sprite.position = self.width / 2, self.height * 0.8
+        self.add(self.name_sprite, z=20)
+
+        self.floor_layer = FloorLayer(self.width)
+        self.floor_layer.position = 0, 50
+        self.add(self.floor_layer, z=10)
 
 
 if __name__ == "__main__":
@@ -86,4 +92,6 @@ if __name__ == "__main__":
     scene.add(MultiplexLayer(MainMenu(), OptionsMenu(), ScoresLayer()), z=1)
 
     scene.add(BackgroundLayer(), z=0)
+    # scene.add(MainLayer())
+
     director.run(scene)
