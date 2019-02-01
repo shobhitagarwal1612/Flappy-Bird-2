@@ -52,11 +52,11 @@ class GameCtrl(Layer):
     def step(self, dt):
         """updates the engine"""
 
-        print('step ticker')
         self.elapsed += dt
         if self.elapsed > status.level.speed:
             self.elapsed = 0
             self.model.move_pipes()
+            self.model.bird.update_pos(dt)
 
     def draw(self):
         """draw the map and the block"""

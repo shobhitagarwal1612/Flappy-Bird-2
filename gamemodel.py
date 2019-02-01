@@ -3,6 +3,7 @@ import weakref
 from pyglet.event import EventDispatcher
 
 import levels
+from layers.bird import Bird
 from status import status
 
 __all__ = ['GameModel']
@@ -17,9 +18,10 @@ class GameModel(EventDispatcher):
     def __init__(self):
         super(GameModel, self).__init__()
 
-        self.init()
-
+        self.bird = None
         self.pipes = {}
+
+        self.init()
 
         status.reset()
 
@@ -29,7 +31,7 @@ class GameModel(EventDispatcher):
         self.ctrl = weakref.ref(ctrl)
 
     def flap_wings(self):
-        print('flap flap')
+        self.bird.flap_flap()
 
     def start(self):
         self.set_next_level()
@@ -55,7 +57,8 @@ class GameModel(EventDispatcher):
         pass
 
     def init(self):
-        pass
+        self.bird = Bird()
+        self.bird.set_initial_speed()
 
     def get_random_pipe(self):
         pass
