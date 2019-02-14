@@ -94,4 +94,5 @@ if __name__ == "__main__":
     scene.add(BackgroundLayer(), z=0)
     # scene.add(MainLayer())
 
+    director.set_show_FPS(True)
     director.run(scene)

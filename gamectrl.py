@@ -52,6 +52,8 @@ class GameCtrl(Layer):
     def step(self, dt):
         """updates the engine"""
 
+        self.model.bird.update_pos(dt)
+
         self.elapsed += dt
         if self.elapsed > status.level.speed:
             self.elapsed = 0

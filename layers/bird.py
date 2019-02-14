@@ -13,7 +13,7 @@ class Bird(object):
 
         self.image = pyglet.resource.image('bird1.png')
         self.top_of_screen = height
-        self.gravity = -30000
+        self.gravity = -300
         self.speedY = 0.0
         self.pos = eu.Point2(width / 2 - 30, height / 2)
         self.radius = 2
@@ -32,9 +32,7 @@ class Bird(object):
 
         speed = self.speedY + self.gravity * dt
 
-        print('distance = ' + str(distance), 'speed = ' + str(speed))
-
-        self.pos.y = self.pos.y + distance
+        self.pos.y += distance
         self.speedY = speed
 
         if self.pos.y > self.top_of_screen:
@@ -42,7 +40,7 @@ class Bird(object):
             self.speedY = 0.0
 
     def set_initial_speed(self):
-        self.speedY = 2000
+        self.speedY = 300
 
 
 class BirdLayer(cocos.layer.Layer):
