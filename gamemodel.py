@@ -56,7 +56,10 @@ class GameModel(EventDispatcher):
 
     def move_pipes(self, dt):
         for pipe in self.pipes:
-            pipe.update_pos(dt)
+            if pipe.is_out_of_left_boundary():
+                self.pipes.remove(pipe)
+            else:
+                pipe.update_pos(dt)
 
     def init(self):
         self.bird = Bird()
