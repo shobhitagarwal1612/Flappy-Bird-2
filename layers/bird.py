@@ -1,6 +1,6 @@
 import cocos
-import cocos.euclid as eu
 import pyglet
+from cocos import euclid
 from cocos.director import director
 
 
@@ -15,7 +15,7 @@ class Bird(object):
         self.top_of_screen = height
         self.gravity = -300
         self.speedY = 0.0
-        self.pos = eu.Point2(width / 2 - 30, height / 2)
+        self.pos = euclid.Point2(width / 2 - 30, height / 2)
         self.radius = 2
         self.rot = 0
 
@@ -26,8 +26,6 @@ class Bird(object):
         self.image.blit(self.pos.x, self.pos.y)
 
     def update_pos(self, dt):
-        print(dt)
-
         distance = self.speedY * dt + 0.5 * self.gravity * dt * dt
 
         speed = self.speedY + self.gravity * dt

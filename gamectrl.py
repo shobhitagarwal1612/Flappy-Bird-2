@@ -53,12 +53,11 @@ class GameCtrl(Layer):
         """updates the engine"""
 
         self.model.bird.update_pos(dt)
+        self.model.move_pipes(dt)
 
         self.elapsed += dt
         if self.elapsed > status.level.speed:
             self.elapsed = 0
-            self.model.move_pipes()
-            self.model.bird.update_pos(dt)
 
     def draw(self):
         """draw the map and the block"""

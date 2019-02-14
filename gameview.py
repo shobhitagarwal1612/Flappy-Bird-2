@@ -59,6 +59,9 @@ class GameView(Layer):
         if self.model.bird:
             self.model.bird.draw()
 
+        for pipe in self.model.pipes:
+            pipe.draw()
+
         # bird = self.model.bird
         #
         # cshape = cm.CircleShape(eu.Vector2(bird.pos.x, bird.pos.y), bird.radius)

@@ -4,6 +4,7 @@ from pyglet.event import EventDispatcher
 
 import levels
 from layers.bird import Bird
+from layers.pipes import Pipes
 from status import status
 
 __all__ = ['GameModel']
@@ -19,7 +20,7 @@ class GameModel(EventDispatcher):
         super(GameModel, self).__init__()
 
         self.bird = None
-        self.pipes = {}
+        self.pipes = list()
 
         self.init()
 
@@ -53,15 +54,18 @@ class GameModel(EventDispatcher):
 
         self.dispatch_event("on_new_level")
 
-    def move_pipes(self):
-        pass
+    def move_pipes(self, dt):
+        for pipe in self.pipes:
+            pipe.update_pos(dt)
 
     def init(self):
         self.bird = Bird()
         self.bird.set_initial_speed()
 
+        self.pipes.append(self.get_random_pipe())
+
     def get_random_pipe(self):
-        pass
+        return Pipes()
 
 
 GameModel.register_event_type('on_new_level')
