@@ -52,7 +52,8 @@ class GameCtrl(Layer):
     def step(self, dt):
         """updates the engine"""
 
-        self.model.check_collision()
+        if self.model.check_collision():
+            self.pause_controller()
 
         self.model.bird.update_pos(dt)
         self.model.move_pipes(dt)

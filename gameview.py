@@ -80,15 +80,17 @@ class BackgroundLayer(ColorLayer):
         self.floor_layer = FloorLayer(self.width)
         self.floor_layer.position = 0, 50
         self.add(self.floor_layer, z=10)
+        self.floor_layer.print()
 
 
 def get_newgame():
     """returns the game scene"""
 
     scene = Scene()
+    background_layer = BackgroundLayer()
 
     # model
-    model = GameModel()
+    model = GameModel(background_layer)
 
     # controller
     ctrl = GameCtrl(model)
@@ -105,7 +107,8 @@ def get_newgame():
 
     # add view
     scene.add(hud, z=3, name="hud")
-    scene.add(BackgroundLayer(), z=0, name="background")
+
+    scene.add(background_layer, z=0, name="background")
     scene.add(view, z=2, name="view")
 
     return scene

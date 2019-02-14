@@ -1,6 +1,8 @@
 import cocos
+import cocos.collision_model as cm
+import cocos.euclid as eu
 from cocos.actions import MoveTo
-from cocos.euclid import Point2
+from cocos.director import director
 
 
 class FloorLayer(cocos.layer.Layer):
@@ -8,7 +10,7 @@ class FloorLayer(cocos.layer.Layer):
     def __init__(self, screen_width):
         super(FloorLayer, self).__init__()
 
-        self.screen_width = screen_width
+        self.width, self.height = director.get_window_size()
 
         self.road_sprite1 = cocos.sprite.Sprite('res/road_base.png')
         self.road_sprite2 = cocos.sprite.Sprite('res/road_base.png')
@@ -17,6 +19,14 @@ class FloorLayer(cocos.layer.Layer):
 
         self.add(self.road_sprite1)
         self.add(self.road_sprite2)
+
+        self.cshape = cm.AARectShape(eu.Vector2(self.width / 2, 20),
+                                     self.road_sprite1.width / 2,
+                                     self.road_sprite1.height / 2)
+
+    def print(self):
+        pass
+        # print(self.road_sprite1.pos, self.road_sprite1.height / 2)
 
     def reset_position(self):
         self.road_sprite1.stop()
@@ -39,13 +49,13 @@ class FloorLayer(cocos.layer.Layer):
         self.move_from_corner_right_to_center(self.road_sprite2)
 
     def move_from_left_corner_to_out_of_screen(self, sprite):
-        destination = Point2(-sprite.width, 0)
+        destination = eu.Point2(-sprite.width, 0)
         action_move = MoveTo(destination, self.get_time() * 3)
         # sprite.do(sequence(action_move, CallFunc(self.keep_going())))
         sprite.do(action_move)
 
     def move_from_corner_right_to_center(self, sprite):
-        destination = Point2(0, 0)
+        destination = eu.Point2(0, 0)
         action_move = MoveTo(destination, self.get_time() * 3)
         sprite.do(action_move)
 

@@ -14,7 +14,7 @@ class Pipes(object):
         self.image = pyglet.resource.image('pipe.png')
         self.speedX = -100
         self.pos = eu.Point2(self.winow_width + self.image.width, self.window_height / 2)
-        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width)
+        self.update_collision_box()
 
     def draw(self):
         self.image.blit(self.pos.x, self.pos.y)
@@ -22,7 +22,15 @@ class Pipes(object):
     def update_pos(self, dt):
         distance = dt * self.speedX
         self.pos.x += distance
-        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width)
+        self.update_collision_box()
+
+    def update_collision_box(self):
+        available_space = self.window_height - self.pos.y
+        visible_height = available_space if available_space < self.image.height else self.image.height
+
+        self.cshape = cm.AARectShape(eu.Vector2(self.pos.x, self.pos.y + visible_height / 2),
+                                     self.image.width / 2,
+                                     visible_height / 2)
 
     def is_out_of_left_boundary(self):
         return self.pos.x < -self.image.width

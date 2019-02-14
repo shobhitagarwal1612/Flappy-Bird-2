@@ -18,8 +18,10 @@ __all__ = ['GameModel']
 
 class GameModel(EventDispatcher):
 
-    def __init__(self):
+    def __init__(self, background_layer):
         super(GameModel, self).__init__()
+
+        self.background_layer = background_layer
 
         self.bird = None
         self.pipes = list()
@@ -82,15 +84,18 @@ class GameModel(EventDispatcher):
     def check_collision(self):
         self.collision_manager.clear()
         self.collision_manager.add(self.bird)
+        self.collision_manager.add(self.background_layer.floor_layer)
 
         for pipe in self.pipes:
             self.collision_manager.add(pipe)
 
-        print(len(self.collision_manager.known_objs()))
-
         # interaction - bird and pipes
         for other in self.collision_manager.iter_colliding(self.bird):
-            print('other', other)
+            print(other)
+            self.dispatch_event('on_game_over')
+            return True
+
+        return False
 
 
 GameModel.register_event_type('on_new_level')

@@ -18,7 +18,7 @@ class Bird(object):
         self.speedY = 0.0
         self.pos = eu.Point2(width / 2 - 30, height / 2)
         self.radius = 2
-        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width)
+        self.update_collision_box()
 
     def flap_flap(self):
         self.set_initial_speed()
@@ -38,10 +38,13 @@ class Bird(object):
             self.pos.y = self.top_of_screen
             self.speedY = 0.0
 
-        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width)
+        self.update_collision_box()
 
     def set_initial_speed(self):
         self.speedY = 300
+
+    def update_collision_box(self):
+        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width / 2)
 
 
 class BirdLayer(cocos.layer.Layer):
