@@ -62,10 +62,8 @@ class GameModel(EventDispatcher):
         self.bird = Bird()
         self.bird.set_initial_speed()
 
-        self.pipes.append(self.get_random_pipe())
-
     def get_random_pipe(self):
-        return Pipes()
+        self.pipes.append(Pipes())
 
 
 GameModel.register_event_type('on_new_level')

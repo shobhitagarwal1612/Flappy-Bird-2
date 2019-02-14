@@ -6,7 +6,7 @@ class Level(object):
 
 
 class Level1(Level):
-    speed = 0.5
+    speed = 3
 
 
 levels = [Level1]

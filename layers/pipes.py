@@ -13,7 +13,7 @@ class Pipes(object):
         self.image = pyglet.resource.image('pipe.png')
         self.top_of_screen = height
         self.speedX = -100
-        self.pos = euclid.Point2(width - 50, height / 2)
+        self.pos = euclid.Point2(width + 50, height / 2)
 
     def draw(self):
         self.image.blit(self.pos.x, self.pos.y)

@@ -56,7 +56,8 @@ class GameCtrl(Layer):
         self.model.move_pipes(dt)
 
         self.elapsed += dt
-        if self.elapsed > status.level.speed:
+        if self.elapsed > status.level.speed and len(self.model.pipes) < 5:
+            self.model.get_random_pipe()
             self.elapsed = 0
 
     def draw(self):
