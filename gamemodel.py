@@ -1,5 +1,7 @@
 import weakref
 
+import cocos.collision_model as cm
+from cocos.director import director
 from pyglet.event import EventDispatcher
 
 import levels
@@ -22,7 +24,7 @@ class GameModel(EventDispatcher):
         self.bird = None
         self.pipes = list()
 
-        self.init()
+        self.width, self.height = director.get_window_size()
 
         status.reset()
 
@@ -58,6 +60,7 @@ class GameModel(EventDispatcher):
         for pipe in self.pipes:
             if pipe.is_out_of_left_boundary():
                 self.pipes.remove(pipe)
+                print('removing pipe')
             else:
                 pipe.update_pos(dt)
 
@@ -65,8 +68,29 @@ class GameModel(EventDispatcher):
         self.bird = Bird()
         self.bird.set_initial_speed()
 
+        self.collision_manager = cm.CollisionManagerGrid(0, self.width,
+                                                         0, self.height,
+                                                         self.bird.image.width, self.bird.image.width)
+
     def get_random_pipe(self):
-        self.pipes.append(Pipes())
+        pipe = Pipes()
+        self.pipes.append(pipe)
+
+        self.collision_manager.add(pipe)
+        print('adding pipe')
+
+    def check_collision(self):
+        self.collision_manager.clear()
+        self.collision_manager.add(self.bird)
+
+        for pipe in self.pipes:
+            self.collision_manager.add(pipe)
+
+        print(len(self.collision_manager.known_objs()))
+
+        # interaction - bird and pipes
+        for other in self.collision_manager.iter_colliding(self.bird):
+            print('other', other)
 
 
 GameModel.register_event_type('on_new_level')

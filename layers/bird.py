@@ -1,6 +1,7 @@
 import cocos
+import cocos.collision_model as cm
+import cocos.euclid as eu
 import pyglet
-from cocos import euclid
 from cocos.director import director
 
 
@@ -15,9 +16,9 @@ class Bird(object):
         self.top_of_screen = height
         self.gravity = -300
         self.speedY = 0.0
-        self.pos = euclid.Point2(width / 2 - 30, height / 2)
+        self.pos = eu.Point2(width / 2 - 30, height / 2)
         self.radius = 2
-        self.rot = 0
+        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width)
 
     def flap_flap(self):
         self.set_initial_speed()
@@ -36,6 +37,8 @@ class Bird(object):
         if self.pos.y > self.top_of_screen:
             self.pos.y = self.top_of_screen
             self.speedY = 0.0
+
+        self.cshape = cm.CircleShape(eu.Vector2(self.pos.x, self.pos.y), self.image.width)
 
     def set_initial_speed(self):
         self.speedY = 300
